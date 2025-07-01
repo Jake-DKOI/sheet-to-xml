@@ -1,6 +1,7 @@
 from flask import Flask, Response
 import requests
 from lxml import html, etree
+import os
 
 app = Flask(__name__)
 
@@ -18,4 +19,5 @@ def serve_xml():
         return Response(f"<error>{str(e)}</error>", mimetype='application/xml')
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
